@@ -375,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1542827116}
   - component: {fileID: 1542827115}
+  - component: {fileID: 1542827117}
   m_Layer: 0
   m_Name: GridLayout
   m_TagString: Untagged
@@ -394,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af3d21a39185284d8decd2506cdc5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapSize: {x: 10, y: 10}
+  _mapSize: {x: 5, y: 5}
   _origin: {x: 0, y: 0, z: 0}
   _tilePrefab: {fileID: 1889233884942203845, guid: bbf48babefa46d745a2db356f04b00ad,
     type: 3}
@@ -412,3 +413,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1542827117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542827114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a6238391934664abf4cb801e2a5a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _plantPrefabs:
+  - {fileID: -927199367670048503, guid: b555a7a00319ff148a5b2042e5ea7548, type: 3}
+  - {fileID: -927199367670048503, guid: dfc7b40150211154d9483a993d8373c7, type: 3}
+  - {fileID: -927199367670048503, guid: fead0bd9eafcd8b4baf2dcdf01eaaab4, type: 3}
+  - {fileID: -927199367670048503, guid: 2fa355db1ef47d644bd63214db33a9da, type: 3}
+  - {fileID: -927199367670048503, guid: c600f90b6f8e8e04a9f2b2ecd3180a03, type: 3}
+  - {fileID: -927199367670048503, guid: 032624c8687a2924db1fdc2ce8ec9fff, type: 3}
+  - {fileID: -927199367670048503, guid: 9b5516a8f9dfd6945acb84e34e496519, type: 3}
+  - {fileID: -927199367670048503, guid: f1ff8cb5775b10547b801cf16a17224b, type: 3}
+  - {fileID: -927199367670048503, guid: 1279b5313b13ad44a83fd368f7677e0e, type: 3}
+  - {fileID: -927199367670048503, guid: e2bc8073f82670a4fb7d47c8e1a24c98, type: 3}

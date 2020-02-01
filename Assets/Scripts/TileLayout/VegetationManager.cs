@@ -19,10 +19,18 @@ public class VegetationManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
+    private List<GameObject> _plantPrefabs = new List<GameObject>();
 
-
-    public void SpawnVegetation()
+    private void Start()
     {
 
+    }
+
+    public GameObject GetRandomPlant()
+    {
+        int choice = Random.Range(0, _plantPrefabs.Count);
+        GameObject newPlant = Instantiate<GameObject>(_plantPrefabs[choice]);
+        return newPlant;
     }
 }
