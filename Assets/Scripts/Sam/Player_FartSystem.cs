@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_FartSystem : MonoBehaviour
 {
-    private float fartMeter = 100; // How long can the angel keep farting, represented in seconds.
+    private float fartMeter = 100f; // How long can the angel keep farting, represented in seconds.
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class Player_FartSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("How long can I fart: " + fartMeter);
+        //Debug.Log("How long can I fart: " + fartMeter);
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -26,7 +26,7 @@ public class Player_FartSystem : MonoBehaviour
             }
             else
             {
-                fartMeter = 0;
+                fartMeter = 0f;
             }
         }
     }
@@ -39,6 +39,6 @@ public class Player_FartSystem : MonoBehaviour
 
     public void ReleaseFart()
     {
-        Debug.Log("Farting rn!");
+        //Debug.Log("Farting rn!");
     }
 }
