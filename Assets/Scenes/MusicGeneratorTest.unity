@@ -188,6 +188,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundTrack
       objectReference: {fileID: 0}
+    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
+        type: 3}
+      propertyPath: baseTrackClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 77902ae47db564d2ab7380633001a2eb, type: 3}
+    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
+        type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1542827114}
+    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1766789883}
+    - target: {fileID: 5244492605276169108, guid: 87db710b1fd254ebc807f7e996a94d11,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 77902ae47db564d2ab7380633001a2eb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87db710b1fd254ebc807f7e996a94d11, type: 3}
 --- !u!1001 &687287658
@@ -481,3 +501,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1766789883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2678243783330732551, guid: 65a80213c02401840963272bacd402de,
+    type: 3}
+  m_PrefabInstance: {fileID: 687287658}
+  m_PrefabAsset: {fileID: 0}

@@ -11,13 +11,15 @@ public class SoundTrack : MonoBehaviour
     public AudioSource baseTrack;
     bool baseTrackOn=false;
     bool trackTriggered = false;
+
+    int lastFrameSongInBeats;
     //beats per minute of a song
     public float bpm;
     //the current position of the song (in seconds)
     float songPosition;
 
     //the current position of the song (in beats)
-    public float songPositionInBeats;
+    public int songPositionInBeats;
 
     //the duration of a beat
     float secPerBeat;
@@ -51,28 +53,28 @@ public class SoundTrack : MonoBehaviour
 
         //Start playing the base track when the game starts
         if (baseTrackOn){
-            if(songPositionInBeats % 4 == 0){
+            if(songPositionInBeats % 4 == 0 && songPositionInBeats !=lastFrameSongInBeats){
                 Debug.Log("Play");
                 //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
-                //StartCoroutine(playOneShot(baseTrackClip, baseTrack));
-                if (!baseTrack.isPlaying){
-                    baseTrack.Play();
-                }
+                StartCoroutine(playOneShot(baseTrackClip, baseTrack));
+                
             }
         }
+
+        lastFrameSongInBeats = songPositionInBeats;
     }
 
-    void beginSoundTrack(){
+    void beginSoundTrack(){ 
         baseTrackOn = true;
     }
 
-    // IEnumerator playOneShot(AudioClip a, AudioSource s){
+    IEnumerator playOneShot(AudioClip a, AudioSource s){
         
-    //     if (!trackTriggered){
-    //         s.PlayOneShot(a, 0.4f);
-    //         trackTriggered = true;
-    //     }
-    //     yield return new WaitForSeconds(2f);
-    //     trackTriggered = false;
-    // }
+        //if (!trackTriggered){
+        s.PlayOneShot(a, 0.4f);
+        //trackTriggered = true;
+        //}
+        yield return new WaitForSeconds(2f);
+        // trackTriggered = false;
+    }
 }
