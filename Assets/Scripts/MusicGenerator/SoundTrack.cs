@@ -7,8 +7,8 @@ public class SoundTrack : MonoBehaviour
     public GameObject grid;
     public GameObject player;
 
-    public AudioClip baseTrackClip;
-    public AudioSource baseTrack;
+    public AudioClip[] baseTrackClipList;
+    public AudioSource[] baseTrack;
     bool baseTrackOn=false;
     bool trackTriggered = false;
 
@@ -60,10 +60,17 @@ public class SoundTrack : MonoBehaviour
         //Start playing the base track when the game starts
         if (baseTrackOn){
             if(songPositionInBeats % 4 == 0 && songPositionInBeats !=lastFrameSongInBeats){
-                Debug.Log("Play");
                 //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
-                StartCoroutine(playOneShot(baseTrackClip, baseTrack));
+                playOneShot(baseTrackClipList[0], baseTrack[0], 0);
                 
+            }
+            if((songPositionInBeats + 2) % 4 == 0 && songPositionInBeats !=lastFrameSongInBeats){
+                //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
+                playOneShot(baseTrackClipList[0], baseTrack[0], 2);
+            }
+            if((songPositionInBeats + 1) % 4 == 0 && songPositionInBeats !=lastFrameSongInBeats){
+                //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
+                playOneShot(baseTrackClipList[0], baseTrack[0], 1);
             }
         }
 
@@ -76,21 +83,40 @@ public class SoundTrack : MonoBehaviour
         baseTrackOn = true;
     }
 
-    IEnumerator playOneShot(AudioClip a, AudioSource s){
+    void playOneShot(AudioClip a, AudioSource s, int beatPosition){
         
-        //if (!trackTriggered){
-        s.PlayOneShot(a, 0.4f);
-        //trackTriggered = true;
-        //}
-        yield return new WaitForSeconds(2f);
-        // trackTriggered = false;
+        // For every 0th beat
+        if(beatPosition == 0) {s.PlayOneShot(a, 0.2f);} // Always play the base track
+        else if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
+            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
+            // For every 2nd beat
+            // If position is even
+            if (beatPosition == 2){
+                if((int)currentGridPosition[0] % 2 == 0){
+                    baseTrack[(int)currentGridPosition[0]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[0]], 0.2f);
+                }
+                if(currentGridPosition[1] % 2 == 0){
+                    baseTrack[(int)currentGridPosition[1]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[1]], 0.2f);
+                }
+            }
+            if (beatPosition == 1){
+                if((int)currentGridPosition[0] % 2 == 1){
+                    baseTrack[(int)currentGridPosition[0]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[0]], 0.2f);
+                }
+                if(currentGridPosition[1] % 2 == 1){
+                    baseTrack[(int)currentGridPosition[1]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[1]], 0.2f);
+                }
+            }
+            
+        }
+        
+        
     }
 
     void triggerPositionBasedMusic(){
         Debug.Log(tileMapObject.GetTileUnderPoint(player.transform.position));
         if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
-            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position)._gridPos;
-            Debug.Log(currentGridPosition);
+            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
         }        
     }
 }
