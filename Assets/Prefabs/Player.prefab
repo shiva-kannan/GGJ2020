@@ -140,8 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58057fe07e542cc4c8242a52fb9d8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fartValue: 28
+  fartValue: 2.8
   fartInterval: 0.5
+  fartPushForce: 200
 --- !u!1 &5763274364146015174
 GameObject:
   m_ObjectHideFlags: 0
