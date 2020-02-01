@@ -107,3 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridPos: {x: 0, y: 0}
+  _cloudDensity: 0
+  _cloudThreshold: 10

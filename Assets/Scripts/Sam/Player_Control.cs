@@ -39,9 +39,4 @@ public class Player_Control : MonoBehaviour
         myrgbody.velocity = velo * moveSpd * Time.deltaTime;
     }
 
-    // ------------- Remove after you implement -------------------
-    //public void ShitPoop()
-    //{
-    //    TileMap.Instance.GetTileUnderPoint(transform.position);
-    //}
 }

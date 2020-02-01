@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class TileMap : MonoBehaviour
 {
-    public static TileMap Instance = null;
-
     public Vector2 _mapSize;
     public Vector3 _origin;
     public TileCell _tilePrefab;
@@ -17,6 +15,8 @@ public class TileMap : MonoBehaviour
 
     private LayerMask m_tileLayer;
 
+    #region Singleton
+    public static TileMap Instance = null;
     private void Awake()
     {
         if (Instance == null)
@@ -29,6 +29,7 @@ public class TileMap : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    #endregion
 
     private void Start()
     {
