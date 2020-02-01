@@ -190,11 +190,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
         type: 3}
-      propertyPath: baseTrackClipList.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
-        type: 3}
       propertyPath: grid
       value: 
       objectReference: {fileID: 1542827114}
@@ -203,21 +198,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1766789883}
-    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
-        type: 3}
-      propertyPath: baseTrackClipList.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: ae83792ebe05145518c8d3acc5e7e44d, type: 3}
-    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
-        type: 3}
-      propertyPath: baseTrackClipList.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8c0d213f114904de3b2ee3ce7e829df2, type: 3}
-    - target: {fileID: 5244492604803863529, guid: 87db710b1fd254ebc807f7e996a94d11,
-        type: 3}
-      propertyPath: baseTrackClipList.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: a7361e5288d70444d8777e400bd6953c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87db710b1fd254ebc807f7e996a94d11, type: 3}
 --- !u!1001 &687287658

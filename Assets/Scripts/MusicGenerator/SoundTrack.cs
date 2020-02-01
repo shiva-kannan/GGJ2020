@@ -12,6 +12,10 @@ public class SoundTrack : MonoBehaviour
     bool baseTrackOn=false;
     bool trackTriggered = false;
 
+    public AudioClip[] bassTracks;
+    public AudioSource drumTrack;
+    public AudioSource bassAudioSource;
+
     int lastFrameSongInBeats;
     //beats per minute of a song
     public float bpm;
@@ -72,6 +76,11 @@ public class SoundTrack : MonoBehaviour
                 //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
                 playOneShot(baseTrackClipList[0], baseTrack[0], 1);
             }
+            // For the bass track
+            if((songPositionInBeats) % 8 == 0 && songPositionInBeats !=lastFrameSongInBeats){
+                //baseTrack.PlayOneShot(baseTrackClip, 0.4f);
+                playOneShot(baseTrackClipList[0], baseTrack[0], 8);
+            }
         }
 
         lastFrameSongInBeats = songPositionInBeats;
@@ -81,12 +90,15 @@ public class SoundTrack : MonoBehaviour
 
     void beginSoundTrack(){ 
         baseTrackOn = true;
+        drumTrack.Play();
     }
 
     void playOneShot(AudioClip a, AudioSource s, int beatPosition){
         
         // For every 0th beat
-        if(beatPosition == 0) {s.PlayOneShot(a, 0.2f);} // Always play the base track
+        if(beatPosition == 0) {
+            s.PlayOneShot(a, 0.2f);
+        } // Always play the base track
         else if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
             currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
             // For every 2nd beat
@@ -105,6 +117,18 @@ public class SoundTrack : MonoBehaviour
                 }
                 if(currentGridPosition[1] % 2 == 1){
                     baseTrack[(int)currentGridPosition[1]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[1]], 0.2f);
+                }
+            }
+            if(beatPosition == 8){
+                
+                if(currentGridPosition[0] < (tileMapObject._mapSize[0] / 2)){
+                    bassAudioSource.clip = bassTracks[0];
+                }
+                else{
+                    bassAudioSource.clip = bassTracks[1];
+                }
+                if (!bassAudioSource.isPlaying){
+                    bassAudioSource.Play();
                 }
             }
             
