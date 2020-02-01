@@ -80,7 +80,8 @@ public class TileCell : MonoBehaviour
                 mPlantDecayTimer = m_PlantDecayRate;
                 break;
             case TileState.Raining:
-                
+                mIsRaining = true;
+                mRainTimer = m_MaxRainTime;
                 break;
             case TileState.Dead:
                 break;
