@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fartValue: 2.8
   fartInterval: 0.5
-  fartPushForce: 0
+  fartPushForce: 200
 --- !u!1 &5763274364146015174
 GameObject:
   m_ObjectHideFlags: 0

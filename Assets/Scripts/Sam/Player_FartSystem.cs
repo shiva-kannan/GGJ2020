@@ -8,7 +8,7 @@ public class Player_FartSystem : MonoBehaviour
     public float fartInterval; // How long is the arbitrary gay between each fart.
     public float fartPushForce; // A small force that the fart applies to player.
 
-    private float fartMeter = 10f; // How long can the angel keep farting, represented in seconds.
+    private float fartMeter = 4f; // How long can the angel keep farting, represented in seconds.
     private float fartTimer = 0f;
 
     // Start is called before the first frame update
@@ -89,7 +89,7 @@ public class Player_FartSystem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 Destroy(other.gameObject);
-
+                fartMeter += other.GetComponent<Food_Property>().foodValue;
             }
         }
     }
