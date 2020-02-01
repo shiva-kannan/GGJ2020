@@ -27,9 +27,14 @@ public class SoundTrack : MonoBehaviour
     //how much time (in seconds) has passed since the song started
     float dspSongTime;
 
+    private TileMap tileMapObject;
+    private Vector2 currentGridPosition;
+
     // Start is called before the first frame update
     void Start()
     {
+        tileMapObject = grid.GetComponent<TileMap>();
+
         //calculate how many seconds is one beat
         //we will see the declaration of bpm later
         secPerBeat = 60f / bpm;
@@ -40,6 +45,7 @@ public class SoundTrack : MonoBehaviour
         //start the song
         //GetComponent<AudioSource>().Play();
         beginSoundTrack();
+
     }
 
     // Update is called once per frame
@@ -62,6 +68,8 @@ public class SoundTrack : MonoBehaviour
         }
 
         lastFrameSongInBeats = songPositionInBeats;
+
+        triggerPositionBasedMusic();
     }
 
     void beginSoundTrack(){ 
@@ -76,5 +84,13 @@ public class SoundTrack : MonoBehaviour
         //}
         yield return new WaitForSeconds(2f);
         // trackTriggered = false;
+    }
+
+    void triggerPositionBasedMusic(){
+        Debug.Log(tileMapObject.GetTileUnderPoint(player.transform.position));
+        if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
+            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position)._gridPos;
+            Debug.Log(currentGridPosition);
+        }        
     }
 }
