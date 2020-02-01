@@ -382,13 +382,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664538070}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.14300154, y: -0.2677111, z: 0.040214222, w: 0.9519791}
+  m_LocalPosition: {x: 5.01, y: 7.82, z: -9.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.086, y: -31.414001, z: 0}
 --- !u!1001 &1744905819429561046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -469,6 +469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678243783330732568, guid: 65a80213c02401840963272bacd402de,
+        type: 3}
+      propertyPath: fartPushForce
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2678243783330732571, guid: 65a80213c02401840963272bacd402de,
         type: 3}
