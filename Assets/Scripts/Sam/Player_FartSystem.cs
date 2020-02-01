@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player_FartSystem : MonoBehaviour
 {
-    private float fartMeter = 100f; // How long can the angel keep farting, represented in seconds.
+    public float fartValue; // How much cloud density does one fart increase.
+    private float fartMeter = 0f; // How long can the angel keep farting, represented in seconds.
 
     // Start is called before the first frame update
     void Start()
@@ -40,5 +41,20 @@ public class Player_FartSystem : MonoBehaviour
     public void ReleaseFart()
     {
         //Debug.Log("Farting rn!");
+        TileCell cellToFartOn = TileMap.Instance.GetTileUnderPoint(transform.position);
+        cellToFartOn._cloudDensity += fartValue;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Food")
+        {
+            // Consume food
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Destroy(other.gameObject);
+
+            }
+        }
     }
 }
