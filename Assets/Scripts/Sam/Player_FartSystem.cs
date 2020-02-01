@@ -19,8 +19,8 @@ public class Player_FartSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("How long can I fart: " + fartMeter);
-
+        Debug.Log("How long can I fart: " + fartMeter);
+        ParticleSystem fartDust = transform.GetChild(0).GetComponent<ParticleSystem>();
         if (Input.GetKey(KeyCode.Space))
         {
             if (fartMeter > 0)
@@ -29,19 +29,26 @@ public class Player_FartSystem : MonoBehaviour
                 if (fartTimer <= 0)
                 {
                     ReleaseFart();
-                    fartMeter -= Time.deltaTime;
-
                     fartTimer = fartInterval;
                 }
+
+                
+                if (!fartDust.isPlaying)
+                {
+                    fartDust.Play();
+                }
+                fartMeter -= Time.deltaTime;
             }
             else
             {
                 fartMeter = 0f;
+                fartDust.Stop();
             }
         }
         else
         {
             fartTimer = 0;
+            fartDust.Stop();
         }
     }
 
@@ -54,7 +61,6 @@ public class Player_FartSystem : MonoBehaviour
     public void ReleaseFart()
     {
         //Debug.Log("Farting rn!");
-        transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 
         if (TileMap.Instance != null)
         {

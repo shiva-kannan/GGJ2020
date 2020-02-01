@@ -41,6 +41,8 @@ public class Player_Control : MonoBehaviour
         Vector3 velo = new Vector3(Input.GetAxis("Horizontal"), myrgbody.velocity.y, Input.GetAxis("Vertical"));
 
         myrgbody.velocity = velo * moveSpd * Time.deltaTime;
+
+        
     }
 
 }
