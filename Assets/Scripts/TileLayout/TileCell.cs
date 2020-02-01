@@ -8,6 +8,9 @@ public class TileCell : MonoBehaviour
     public float _cloudDensity;
     public float _cloudThreshold;
 
+    [SerializeField]
+    private GameObject m_cloud = null;
+
     private void Start()
     {
         
@@ -18,6 +21,7 @@ public class TileCell : MonoBehaviour
         _cloudDensity += density;
         
         // Also create/scale the cloud object for this cell.
+
     }
 
     private void Update()
