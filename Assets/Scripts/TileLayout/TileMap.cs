@@ -42,6 +42,7 @@ public class TileMap : MonoBehaviour
             for (int j = 0; j < _mapSize.y; j++)
             {
                 TileCell newCell = Instantiate<TileCell>(_tilePrefab, _origin + new Vector3(i, 0, j), Quaternion.identity, transform);
+                newCell.pGridPos = new Vector2(i, j);
                 row.Add(newCell);
             }
             m_tileCells.Add(row);

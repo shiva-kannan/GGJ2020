@@ -6,6 +6,9 @@ public class TileCell : MonoBehaviour
 {
     private TileState mCurrentState = TileState.Decaying;
 
+    private Vector2 mGridPos;
+
+
     [Range(0, 10)][SerializeField]
     private float _cloudDensity;
     private float _cloudThreshold;
@@ -29,6 +32,8 @@ public class TileCell : MonoBehaviour
     private float m_PlantDecayRate = 10;
 
     private bool mIsRaining = false;
+
+    public Vector2 pGridPos { get => mGridPos; set => mGridPos = value; }
 
     private void Start()
     {

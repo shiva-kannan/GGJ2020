@@ -11,6 +11,9 @@ public class Player_FartSystem : MonoBehaviour
     private float fartMeter = 4f; // How long can the angel keep farting, represented in seconds.
     private float fartTimer = 0f;
 
+    [SerializeField]
+    private ParticleSystem m_fartParticles = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,6 @@ public class Player_FartSystem : MonoBehaviour
     void Update()
     {
         //Debug.Log("How long can I fart: " + fartMeter);
-        ParticleSystem fartDust = transform.GetChild(0).GetComponent<ParticleSystem>();
         if (Input.GetKey(KeyCode.Space))
         {
             if (fartMeter > 0)
@@ -34,9 +36,9 @@ public class Player_FartSystem : MonoBehaviour
                 }
 
                 
-                if (!fartDust.isPlaying)
+                if (!m_fartParticles.isPlaying)
                 {
-                    fartDust.Play();
+                    m_fartParticles.Play();
                 }
                 fartMeter -= Time.deltaTime;
 
@@ -45,13 +47,13 @@ public class Player_FartSystem : MonoBehaviour
             else
             {
                 fartMeter = 0f;
-                fartDust.Stop();
+                m_fartParticles.Stop();
             }
         }
         else
         {
             fartTimer = 0;
-            fartDust.Stop();
+            m_fartParticles.Stop();
         }
 
 
