@@ -15,11 +15,18 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    public Image _fartBarFill = null;
-    public Image _healthBarFill = null;
+    public Image _fartBar1Fill = null;
+    public Image _fartBar2Fill = null;
 
-    public void SetFartMeter(float percent)
+    public void SetFartMeter(float percent, int forPlayer)
     {
-        _fartBarFill.fillAmount = percent;
+        if (forPlayer == 1)
+        {
+            _fartBar1Fill.fillAmount = percent;
+        }
+        else
+        {
+            _fartBar2Fill.fillAmount = percent;
+        }
     }
 }

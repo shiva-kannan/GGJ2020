@@ -22,7 +22,7 @@ public class FartAudio : MonoBehaviour
 
     public IEnumerator randomPlayFart(){
         fartTriggered = true;
-        Debug.Log("Starting audio fart");
+        //Debug.Log("Starting audio fart");
         var randomInt = Random.Range(0,3);
         fartAudioSource.clip = fartAudioClips[randomInt];
         //AudioController.FadeIn(fartAudioSource, 0.5f);

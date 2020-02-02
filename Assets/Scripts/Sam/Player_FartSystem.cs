@@ -26,58 +26,47 @@ public class Player_FartSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("How long can I fart: " + fartMeter);
-        if (Input.GetKey(KeyCode.Space))
+        if (gameObject.CompareTag("Player"))
         {
-            if (fartMeter > 0)
+            if (Input.GetButton("Fire1"))
             {
-                fartTimer -= Time.deltaTime;
-                if (fartTimer <= 0)
-                {
-                    ReleaseFart();
-                    fartTimer = fartInterval;
-                }
-
-                
-                if (!m_fartParticles.isPlaying)
-                {
-                    m_fartParticles.Play();
-                }
-
-                // Play the fart audio
-                if (!fartAudioSource.GetComponent<FartAudio>().fartTriggered){
-                    StartCoroutine(fartAudioSource.GetComponent<FartAudio>().randomPlayFart());                
-                }
-                fartMeter -= Time.deltaTime;
-
-                GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * Time.deltaTime;
+                ProcessFarting();
+                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, 1);
             }
             else
             {
-                fartMeter = 0f;
+                fartTimer = 0;
                 m_fartParticles.Stop();
+                AudioController.FadeOut(fartAudioSource, 0.2f);
+                fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
             }
-
-            HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
         }
         else
         {
-            fartTimer = 0;
-            m_fartParticles.Stop();
-            AudioController.FadeOut(fartAudioSource, 0.2f);
-            fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
+            if (Input.GetButton("Fire2"))
+            {
+                ProcessFarting();
+                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, 2);
+            }
+            else
+            {
+                fartTimer = 0;
+                m_fartParticles.Stop();
+                AudioController.FadeOut(fartAudioSource, 0.2f);
+                fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
+            }
         }
 
         if (gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetButtonUp("Fire1"))
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
         else
         {
-            if (Input.GetKey(KeyCode.RightControl))
+            if (Input.GetButtonUp("Fire2"))
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
@@ -91,6 +80,39 @@ public class Player_FartSystem : MonoBehaviour
         // ----------- End CHEAT -------------
     }
 
+    private void ProcessFarting()
+    {
+        if (fartMeter > 0)
+        {
+            fartTimer -= Time.deltaTime;
+            if (fartTimer <= 0)
+            {
+                ReleaseFart();
+                fartTimer = fartInterval;
+            }
+
+
+            if (!m_fartParticles.isPlaying)
+            {
+                m_fartParticles.Play();
+            }
+
+            // Play the fart audio
+            if (!fartAudioSource.GetComponent<FartAudio>().fartTriggered)
+            {
+                StartCoroutine(fartAudioSource.GetComponent<FartAudio>().randomPlayFart());
+            }
+            fartMeter -= Time.deltaTime;
+
+            GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * Time.deltaTime;
+        }
+        else
+        {
+            fartMeter = 0f;
+            m_fartParticles.Stop();
+        }
+    }
+
     public void AccumulateFart(float amount)
     {
         fartMeter += amount;
@@ -99,7 +121,9 @@ public class Player_FartSystem : MonoBehaviour
             fartMeter = fartMAX;
         }
 
-        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
+        int player = gameObject.CompareTag("Player") ? 1 : 2;
+
+        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, player);
     }
 
 

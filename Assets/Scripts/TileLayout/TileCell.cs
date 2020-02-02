@@ -195,7 +195,7 @@ public class TileCell : MonoBehaviour
                     mRainTimer -= Time.deltaTime;
                     float sizeDelta = 0.1f * Time.deltaTime;
                     float size = Mathf.Clamp01(mPlant.transform.localScale.x + sizeDelta);
-                    Debug.Log("Plant size : " + size);
+                    //Debug.Log("Plant size : " + size);
                     mPlant.transform.localScale = Vector3.one * size;
                 }
                 break;

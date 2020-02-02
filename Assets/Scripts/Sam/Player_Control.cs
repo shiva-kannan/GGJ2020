@@ -62,7 +62,7 @@ public class Player_Control : MonoBehaviour
 
             if (this.gameObject.tag == "Player")
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) < 0.05f && Mathf.Abs(Input.GetAxis("Vertical1")) < 0.05f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal1")) < 0.1f && Mathf.Abs(Input.GetAxis("Vertical1")) < 0.1f)
                 {
                     myrgbody.velocity = Vector3.zero;
                     isMoving = false;
@@ -70,7 +70,7 @@ public class Player_Control : MonoBehaviour
             }
             else
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal2")) < 0.05f && Mathf.Abs(Input.GetAxis("Vertical2")) < 0.05f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) < 0.1f && Mathf.Abs(Input.GetAxis("Vertical2")) < 0.1f)
                 {
                     myrgbody.velocity = Vector3.zero;
                     isMoving = false;
@@ -82,14 +82,14 @@ public class Player_Control : MonoBehaviour
         {
             if (this.gameObject.tag == "Player")
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal1")) >= 0.05f || Mathf.Abs(Input.GetAxis("Vertical1")) >= 0.05f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal1")) >= 0.1f || Mathf.Abs(Input.GetAxis("Vertical1")) >= 0.1f)
                 {
                     isMoving = true;
                 }
             }
             else
             {
-                if (Mathf.Abs(Input.GetAxis("Horizontal2")) >= 0.05f || Mathf.Abs(Input.GetAxis("Vertical2")) >= 0.05f)
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) >= 0.1f || Mathf.Abs(Input.GetAxis("Vertical2")) >= 0.1f)
                 {
                     isMoving = true;
                 }
