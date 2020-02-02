@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player_Control : MonoBehaviour
 {
+    public PlayerNumber _playerNumber;
+
     public float moveSpd;
 
     private bool isMoving = false;
@@ -104,4 +106,11 @@ public class Player_Control : MonoBehaviour
         return faceDirect;
     }
 
+}
+
+public enum PlayerNumber
+{
+    None,
+    Player1,
+    Player2,
 }

@@ -17,21 +17,25 @@ public class Player_FartSystem : MonoBehaviour
     private ParticleSystem m_fartParticles = null;
 
     private AudioSource fartAudio;
+
+    private PlayerNumber mPlayerNumer;
+
     // Start is called before the first frame update
     void Start()
     {
         fartAudio = GetComponent<AudioSource>();
+        mPlayerNumer = gameObject.CompareTag("Player") ? PlayerNumber.Player1 : PlayerNumber.Player2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.CompareTag("Player"))
+        if (mPlayerNumer == PlayerNumber.Player1)
         {
             if (Input.GetButton("Fire1"))
             {
                 ProcessFarting();
-                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, 1);
+                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, mPlayerNumer);
             }
             else
             {
@@ -46,7 +50,7 @@ public class Player_FartSystem : MonoBehaviour
             if (Input.GetButton("Fire2"))
             {
                 ProcessFarting();
-                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, 2);
+                HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, mPlayerNumer);
             }
             else
             {
@@ -57,7 +61,7 @@ public class Player_FartSystem : MonoBehaviour
             }
         }
 
-        if (gameObject.CompareTag("Player"))
+        if (mPlayerNumer == PlayerNumber.Player1)
         {
             if (Input.GetButtonUp("Fire1"))
             {
@@ -121,9 +125,7 @@ public class Player_FartSystem : MonoBehaviour
             fartMeter = fartMAX;
         }
 
-        int player = gameObject.CompareTag("Player") ? 1 : 2;
-
-        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, player);
+        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX, mPlayerNumer);
     }
 
 
@@ -136,7 +138,7 @@ public class Player_FartSystem : MonoBehaviour
             TileCell cellToFartOn = TileMap.Instance.GetTileUnderPoint(transform.position);
             if (cellToFartOn != null)
             {
-                cellToFartOn.AddFartCloud(fartValue);
+                cellToFartOn.AddFartCloud(fartValue, mPlayerNumer);
             }
         }
     }

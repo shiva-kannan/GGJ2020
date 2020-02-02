@@ -18,9 +18,9 @@ public class HUDManager : MonoBehaviour
     public Image _fartBar1Fill = null;
     public Image _fartBar2Fill = null;
 
-    public void SetFartMeter(float percent, int forPlayer)
+    public void SetFartMeter(float percent, PlayerNumber forPlayer)
     {
-        if (forPlayer == 1)
+        if (forPlayer == PlayerNumber.Player1)
         {
             _fartBar1Fill.fillAmount = percent;
         }

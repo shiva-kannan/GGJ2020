@@ -20,17 +20,31 @@ public class VegetationManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private List<GameObject> _plantPrefabs = new List<GameObject>();
+    private List<GameObject> _p1PlantPrefabs = new List<GameObject>();
+
+    [SerializeField]
+    private List<GameObject> _p2PlantPrefabs = new List<GameObject>();
 
     private void Start()
     {
 
     }
 
-    public GameObject GetRandomPlant()
+    public GameObject GetRandomPlant(PlayerNumber forPlayer)
     {
-        int choice = Random.Range(0, _plantPrefabs.Count);
-        GameObject newPlant = Instantiate<GameObject>(_plantPrefabs[choice]);
+        int choice;
+        GameObject newPlant;
+        if (forPlayer == PlayerNumber.Player1)
+        {
+            choice = Random.Range(0, _p1PlantPrefabs.Count);
+            newPlant = Instantiate<GameObject>(_p1PlantPrefabs[choice]);
+        }
+        else
+        {
+            choice = Random.Range(0, _p2PlantPrefabs.Count);
+            newPlant = Instantiate<GameObject>(_p2PlantPrefabs[choice]);
+        }
+        
         return newPlant;
     }
 }

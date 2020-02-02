@@ -8,10 +8,8 @@ public class TileCell : MonoBehaviour
 
     private Vector2 mGridPos;
 
-
-    [Range(0, 10)][SerializeField]
+    [SerializeField]
     private float _cloudDensity;
-    private float _cloudThreshold;
 
     private const float CloudMaxDensity = 10;
 
@@ -35,6 +33,7 @@ public class TileCell : MonoBehaviour
     private float m_PlantDecayRate = 10;
 
     private bool mIsRaining = false;
+    private PlayerNumber mCurrentPlayer = PlayerNumber.None;
 
     public Vector2 pGridPos { get => mGridPos; set => mGridPos = value; }
 
@@ -43,25 +42,26 @@ public class TileCell : MonoBehaviour
         SwitchState(TileState.Normal);
     }
 
-    public void AddFartCloud(float density)
+    public void AddFartCloud(float density, PlayerNumber forPlayer)
     {
-        if (mIsRaining)
+        if (mIsRaining || mPlant != null)
         {
             return;
         }
 
         _cloudDensity += density;
-        SetCloudDensity();
+        SetCloudDensity(false, forPlayer);
         
         mCloudDecayTimer = m_MaxCloudDecayTime;
 
         if (_cloudDensity >= 0.9f * CloudMaxDensity)
         {
+            mCurrentPlayer = forPlayer;
             SwitchState(TileState.Raining);
         }
     }
 
-    private void SetCloudDensity()
+    private void SetCloudDensity(bool reduce, PlayerNumber forPlayer)
     {
         _cloudDensity = Mathf.Clamp(_cloudDensity, 0, CloudMaxDensity);
 
@@ -69,6 +69,12 @@ public class TileCell : MonoBehaviour
         var ps = m_cloud.GetComponent<ParticleSystem>();
         var main = ps.main;
         var emission = ps.emission;
+
+        Color cloudColor = main.startColor.color;
+        if (!reduce)
+        {
+            cloudColor = forPlayer == PlayerNumber.Player1 ? Color.blue : Color.red;
+        }
 
         if (_cloudDensity > 0)
         {
@@ -80,7 +86,9 @@ public class TileCell : MonoBehaviour
         }
 
         emission.rateOverTime = _cloudDensity;
-        main.startColor = new Color(1, 1, 1, _cloudDensity / CloudMaxDensity);
+
+        cloudColor.a = _cloudDensity / CloudMaxDensity;
+        main.startColor = cloudColor;
     }
 
     private void SwitchState(TileState nextState)
@@ -117,7 +125,8 @@ public class TileCell : MonoBehaviour
         {
             return;
         }
-        mPlant = VegetationManager.Instance.GetRandomPlant();
+
+        mPlant = VegetationManager.Instance.GetRandomPlant(mCurrentPlayer);
         mPlant.transform.SetParent(transform);
         mPlant.transform.localPosition = new Vector3(0,0.5f,0);
         mPlant.transform.localScale = Vector3.zero;
@@ -134,7 +143,7 @@ public class TileCell : MonoBehaviour
             {
                 mCloudDecayTimer -= Time.deltaTime;
                 _cloudDensity = mCloudDecayTimer * CloudMaxDensity / m_MaxCloudDecayTime;
-                SetCloudDensity();
+                SetCloudDensity(true, PlayerNumber.None);
             }
         }
     }
@@ -157,7 +166,7 @@ public class TileCell : MonoBehaviour
             case TileState.Decaying:
                 if (mPlantDecayTimer <= 0)
                 {
-                    Debug.Log("Plant decayed");
+                    //Debug.Log("Plant decayed");
                     SwitchState(TileState.Dead);
                 }
                 else
@@ -177,10 +186,11 @@ public class TileCell : MonoBehaviour
             case TileState.Raining:
                 if (mRainTimer <= 0)
                 {
+                    mCurrentPlayer = PlayerNumber.None;
                     m_rainParticles.Stop();
                     mIsRaining = false;
                     _cloudDensity = 0;
-                    SetCloudDensity();
+                    SetCloudDensity(true, PlayerNumber.None);
                     if (mPlantDecayTimer < m_PlantDecayRate)
                     {
                         SwitchState(TileState.Decaying);
