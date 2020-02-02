@@ -12,6 +12,7 @@ public class Player_FartSystem : MonoBehaviour
     public AudioSource fartAudioSource;
     private float fartMeter = 4f; // How long can the angel keep farting, represented in seconds.
     private float fartTimer = 0f;
+    private bool isSuperFart = false;
 
     [SerializeField]
     private ParticleSystem m_fartParticles = null;
@@ -66,6 +67,7 @@ public class Player_FartSystem : MonoBehaviour
             if (Input.GetButtonUp("Fire1"))
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
+                isSuperFart = false;
             }
         }
         else
@@ -73,6 +75,7 @@ public class Player_FartSystem : MonoBehaviour
             if (Input.GetButtonUp("Fire2"))
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
+                isSuperFart = false;
             }
         }
 
@@ -91,6 +94,10 @@ public class Player_FartSystem : MonoBehaviour
             fartTimer -= Time.deltaTime;
             if (fartTimer <= 0)
             {
+                if (fartMeter >= fartMAX)
+                {
+                    isSuperFart = true;
+                }
                 ReleaseFart();
                 fartTimer = fartInterval;
             }
@@ -107,12 +114,19 @@ public class Player_FartSystem : MonoBehaviour
                 StartCoroutine(fartAudioSource.GetComponent<FartAudio>().randomPlayFart());
             }
             fartMeter -= Time.deltaTime;
-
-            GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * Time.deltaTime;
+            if (isSuperFart)
+            {
+                GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * 5f * Time.deltaTime;
+            }
+            else
+            {
+                GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * Time.deltaTime;
+            }
         }
         else
         {
             fartMeter = 0f;
+            isSuperFart = false;
             m_fartParticles.Stop();
         }
     }
@@ -138,7 +152,14 @@ public class Player_FartSystem : MonoBehaviour
             TileCell cellToFartOn = TileMap.Instance.GetTileUnderPoint(transform.position);
             if (cellToFartOn != null)
             {
-                cellToFartOn.AddFartCloud(fartValue, mPlayerNumer);
+                if (isSuperFart)
+                {
+                    cellToFartOn.AddFartCloud(fartValue * 2.5f, mPlayerNumer);
+                }
+                else
+                {
+                    cellToFartOn.AddFartCloud(fartValue, mPlayerNumer);
+                }
             }
         }
     }
