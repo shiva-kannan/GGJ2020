@@ -52,7 +52,7 @@ public class TileCell : MonoBehaviour
 
         _cloudDensity += density;
         SetCloudDensity();
-        //main.startColor = 
+        
         mCloudDecayTimer = m_MaxCloudDecayTime;
 
         if (_cloudDensity >= 0.9f * CloudMaxDensity)
@@ -80,6 +80,7 @@ public class TileCell : MonoBehaviour
         }
 
         emission.rateOverTime = _cloudDensity;
+        main.startColor = new Color(1, 1, 1, _cloudDensity / CloudMaxDensity);
     }
 
     private void SwitchState(TileState nextState)
@@ -112,6 +113,10 @@ public class TileCell : MonoBehaviour
 
     private void GrowVegetation()
     {
+        if (mPlant != null)
+        {
+            return;
+        }
         mPlant = VegetationManager.Instance.GetRandomPlant();
         mPlant.transform.SetParent(transform);
         mPlant.transform.localPosition = new Vector3(0,0.5f,0);
@@ -159,6 +164,14 @@ public class TileCell : MonoBehaviour
                 {
                     //Debug.Log("Decay timer : " + mPlantDecayTimer);
                     mPlantDecayTimer -= Time.deltaTime;
+
+                    //if (mPlant != null)
+                    //{
+                    //    float sizeDelta = 0.035f * Time.deltaTime;
+                    //    float size = Mathf.Clamp01(mPlant.transform.localScale.x - sizeDelta);
+                    //    Debug.Log("Plant size : " + size);
+                    //    mPlant.transform.localScale = Vector3.one * size;
+                    //}
                 }
                 break;
             case TileState.Raining:
