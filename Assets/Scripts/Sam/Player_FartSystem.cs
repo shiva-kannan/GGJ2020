@@ -57,6 +57,8 @@ public class Player_FartSystem : MonoBehaviour
                 fartMeter = 0f;
                 m_fartParticles.Stop();
             }
+
+            HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
         }
         else
         {
@@ -66,10 +68,19 @@ public class Player_FartSystem : MonoBehaviour
             fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
         }
 
-
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (gameObject.CompareTag("Player"))
         {
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.RightControl))
+            {
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
         }
 
         // ----------- CHEAT -------------
@@ -87,6 +98,8 @@ public class Player_FartSystem : MonoBehaviour
         {
             fartMeter = fartMAX;
         }
+
+        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
     }
 
 
