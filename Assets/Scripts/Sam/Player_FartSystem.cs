@@ -148,7 +148,7 @@ public class Player_FartSystem : MonoBehaviour
 
     public void ReleaseFart()
     {
-        //Debug.Log("Farting rn!");
+        Debug.Log("Farting rn: " + mPlayerNumer);
 
         if (TileMap.Instance != null)
         {

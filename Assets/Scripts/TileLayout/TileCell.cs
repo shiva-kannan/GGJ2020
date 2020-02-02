@@ -14,9 +14,13 @@ public class TileCell : MonoBehaviour
     private const float CloudMaxDensity = 10;
 
     [SerializeField]
-    private GameObject m_cloud = null;
+    private GameObject m_cloud1 = null;
     [SerializeField]
-    private ParticleSystem m_rainParticles = null;
+    private GameObject m_cloud2 = null;
+    [SerializeField]
+    private ParticleSystem m_rainParticles1 = null;
+    [SerializeField]
+    private ParticleSystem m_rainParticles2 = null;
 
     [SerializeField]
     private float m_MaxCloudDecayTime = 10;   // Cloud decays in m_CloudDecayRate seconds
@@ -49,6 +53,8 @@ public class TileCell : MonoBehaviour
             return;
         }
 
+        //Debug.Log("Add fart: " + forPlayer);
+
         _cloudDensity += density;
         SetCloudDensity(false, forPlayer);
         
@@ -65,30 +71,94 @@ public class TileCell : MonoBehaviour
     {
         _cloudDensity = Mathf.Clamp(_cloudDensity, 0, CloudMaxDensity);
 
-        // Also create/scale the cloud object for this cell.
-        var ps = m_cloud.GetComponent<ParticleSystem>();
-        var main = ps.main;
-        var emission = ps.emission;
+        //Debug.Log("Set Cloud: " + forPlayer);
 
-        Color cloudColor = main.startColor.color;
         if (!reduce)
         {
-            cloudColor = forPlayer == PlayerNumber.Player1 ? Color.blue : Color.red;
-        }
+            // Also create/scale the cloud object for this cell
+            GameObject m_cloud;
+            if (forPlayer == PlayerNumber.Player1)
+            {
+                m_cloud = m_cloud1;
+                //Debug.Log("For P1");
+            }
+            else
+            {
+                m_cloud = m_cloud2;
+                //Debug.Log("For P2");
+            }
+            var ps = m_cloud.GetComponent<ParticleSystem>();
+            var main = ps.main;
+            var emission = ps.emission;
 
-        if (_cloudDensity > 0)
-        {
-            emission.enabled = true;
+            Color cloudColor = main.startColor.color;
+            if (!reduce)
+            {
+                //cloudColor = forPlayer == PlayerNumber.Player1 ? Color.blue : Color.red;
+            }
+
+            if (_cloudDensity > 0)
+            {
+                emission.enabled = true;
+            }
+            else
+            {
+                emission.enabled = false;
+            }
+
+            emission.rateOverTime = _cloudDensity;
+
+            cloudColor.a = _cloudDensity / CloudMaxDensity;
+            //main.startColor = cloudColor;
         }
         else
         {
-            emission.enabled = false;
+            var ps1 = m_cloud1.GetComponent<ParticleSystem>();
+            var main1 = ps1.main;
+            var emission1 = ps1.emission;
+
+            var ps2 = m_cloud2.GetComponent<ParticleSystem>();
+            var main2 = ps2.main;
+            var emission2 = ps2.emission;
+
+
+            if (emission1.enabled)
+            {
+                Debug.Log("Reduce P1");
+                Color cloudColor = main1.startColor.color;
+                if (_cloudDensity > 0)
+                {
+                    emission1.enabled = true;
+                }
+                else
+                {
+                    emission1.enabled = false;
+                }
+
+                emission1.rateOverTime = _cloudDensity;
+
+                cloudColor.a = _cloudDensity / CloudMaxDensity;
+                //main.startColor = cloudColor;
+            }else if (emission2.enabled)
+            {
+                Debug.Log("Reduce P2");
+                Color cloudColor = main2.startColor.color;
+                if (_cloudDensity > 0)
+                {
+                    emission2.enabled = true;
+                }
+                else
+                {
+                    emission2.enabled = false;
+                }
+
+                emission2.rateOverTime = _cloudDensity;
+
+                cloudColor.a = _cloudDensity / CloudMaxDensity;
+                //main.startColor = cloudColor;
+            }
+
         }
-
-        emission.rateOverTime = _cloudDensity;
-
-        cloudColor.a = _cloudDensity / CloudMaxDensity;
-        main.startColor = cloudColor;
     }
 
     private void SwitchState(TileState nextState)
@@ -110,6 +180,16 @@ public class TileCell : MonoBehaviour
                 GrowVegetation();
                 mIsRaining = true;
                 mRainTimer = m_MaxRainTime;
+
+                ParticleSystem m_rainParticles;
+                if (mCurrentPlayer == PlayerNumber.Player1)
+                {
+                    m_rainParticles = m_rainParticles1;
+                }
+                else
+                {
+                    m_rainParticles = m_rainParticles2;
+                }
                 m_rainParticles.Play();
                 break;
             case TileState.Dead:
@@ -187,7 +267,8 @@ public class TileCell : MonoBehaviour
                 if (mRainTimer <= 0)
                 {
                     mCurrentPlayer = PlayerNumber.None;
-                    m_rainParticles.Stop();
+                    m_rainParticles1.Stop();
+                    m_rainParticles2.Stop();
                     mIsRaining = false;
                     _cloudDensity = 0;
                     SetCloudDensity(true, PlayerNumber.None);
