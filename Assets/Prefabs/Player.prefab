@@ -4985,6 +4985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ccfb094561a7c449da4b04b2230d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerNumber: 0
   moveSpd: 750
 --- !u!114 &2678243783330732568
 MonoBehaviour:

@@ -128,6 +128,9 @@ public class Player_FartSystem : MonoBehaviour
             fartMeter = 0f;
             isSuperFart = false;
             m_fartParticles.Stop();
+            Debug.Log("Stp the fart sound already!");
+            AudioController.FadeOut(fartAudioSource, 0.2f);
+            fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
         }
     }
 
