@@ -216,6 +216,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: star_ani
       objectReference: {fileID: 0}
+    - target: {fileID: 1318462475825722627, guid: 66e68983d6fc1ba49be98ea05a6f6068,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7754204f1aad997478ae027ccab874e1, type: 2}
+    - target: {fileID: 1318462475825722627, guid: 66e68983d6fc1ba49be98ea05a6f6068,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7754204f1aad997478ae027ccab874e1, type: 2}
     - target: {fileID: 3383253211369017260, guid: 66e68983d6fc1ba49be98ea05a6f6068,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
