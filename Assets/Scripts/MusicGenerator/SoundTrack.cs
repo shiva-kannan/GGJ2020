@@ -5,7 +5,8 @@ using UnityEngine;
 public class SoundTrack : MonoBehaviour
 {
     public GameObject grid;
-    public GameObject player;
+    public GameObject player1;
+    public GameObject player2;
 
     public AudioClip[] baseTrackClipList;
     public AudioSource[] baseTrack;
@@ -32,7 +33,8 @@ public class SoundTrack : MonoBehaviour
     float dspSongTime;
 
     private TileMap tileMapObject;
-    private Vector2 currentGridPosition;
+    private Vector2 currentGridPositionPlayer1;
+    private Vector2 currentGridPositionPlayer2;
 
     // Start is called before the first frame update
     void Start()
@@ -85,12 +87,14 @@ public class SoundTrack : MonoBehaviour
 
         lastFrameSongInBeats = songPositionInBeats;
 
-        triggerPositionBasedMusic();
+        //triggerPositionBasedMusic();
     }
 
     void beginSoundTrack(){ 
         baseTrackOn = true;
         drumTrack.Play();
+        //bassAudioSource.clip = baseTrackClipList[0];
+        bassAudioSource.Play();
     }
 
     void playOneShot(AudioClip a, AudioSource s, int beatPosition){
@@ -99,48 +103,51 @@ public class SoundTrack : MonoBehaviour
         if(beatPosition == 0) {
             s.PlayOneShot(a, 0.2f);
         } // Always play the base track
-        else if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
-            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
+        else if (tileMapObject.GetTileUnderPoint(player1.transform.position) != null && 
+        tileMapObject.GetTileUnderPoint(player2.transform.position) != null){
+            currentGridPositionPlayer1 = tileMapObject.GetTileUnderPoint(player1.transform.position).pGridPos;
+            currentGridPositionPlayer2 = tileMapObject.GetTileUnderPoint(player2.transform.position).pGridPos;
             // For every 2nd beat
             // If position is even
             if (beatPosition == 2){
-                if((int)currentGridPosition[0] % 2 == 0){
-                    baseTrack[(int)currentGridPosition[0]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[0]], 0.2f);
+                if((int)currentGridPositionPlayer2[0] % 2 == 0){
+                    baseTrack[(int)currentGridPositionPlayer2[0]].PlayOneShot(baseTrackClipList[(int)currentGridPositionPlayer2[0]], 0.2f);
                 }
-                if(currentGridPosition[1] % 2 == 0){
-                    baseTrack[(int)currentGridPosition[1]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[1]], 0.2f);
+                if(currentGridPositionPlayer2[1] % 2 == 0){
+                    baseTrack[(int)currentGridPositionPlayer2[1]].PlayOneShot(baseTrackClipList[(int)currentGridPositionPlayer2[1]], 0.2f);
                 }
             }
             if (beatPosition == 1){
-                if((int)currentGridPosition[0] % 2 == 1){
-                    baseTrack[(int)currentGridPosition[0]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[0]], 0.2f);
+                if((int)currentGridPositionPlayer1[0] % 2 == 1){
+                    baseTrack[(int)currentGridPositionPlayer1[0]].PlayOneShot(baseTrackClipList[(int)currentGridPositionPlayer1[0]], 0.2f);
                 }
-                if(currentGridPosition[1] % 2 == 1){
-                    baseTrack[(int)currentGridPosition[1]].PlayOneShot(baseTrackClipList[(int)currentGridPosition[1]], 0.2f);
+                if(currentGridPositionPlayer1[1] % 2 == 1){
+                    baseTrack[(int)currentGridPositionPlayer1[1]].PlayOneShot(baseTrackClipList[(int)currentGridPositionPlayer1[1]], 0.2f);
                 }
             }
-            if(beatPosition == 8){
+            // if(beatPosition == 8){
                 
-                if(currentGridPosition[0] < (tileMapObject._mapSize[0] / 2)){
-                    bassAudioSource.clip = bassTracks[0];
-                }
-                else{
-                    bassAudioSource.clip = bassTracks[1];
-                }
-                if (!bassAudioSource.isPlaying){
-                    bassAudioSource.Play();
-                }
-            }
+            //     if(currentGridPositionPlayer1[0] < (tileMapObject._mapSize[0] / 2)){// && 
+            //     //currentGridPositionPlayer2[0] < (tileMapObject._mapSize[0] / 2)){
+            //         bassAudioSource.clip = bassTracks[0];
+            //     }
+            //     else{
+            //         bassAudioSource.clip = bassTracks[1];
+            //     }
+            //     if (!bassAudioSource.isPlaying){
+            //         bassAudioSource.Play();
+            //     }
+            // }
             
         }
         
         
     }
 
-    void triggerPositionBasedMusic(){
-        Debug.Log(tileMapObject.GetTileUnderPoint(player.transform.position));
-        if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
-            currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
-        }        
-    }
+    // void triggerPositionBasedMusic(){
+    //     Debug.Log(tileMapObject.GetTileUnderPoint(player.transform.position));
+    //     if (tileMapObject.GetTileUnderPoint(player.transform.position) != null){
+    //         currentGridPosition = tileMapObject.GetTileUnderPoint(player.transform.position).pGridPos;
+    //     }        
+    // }
 }
