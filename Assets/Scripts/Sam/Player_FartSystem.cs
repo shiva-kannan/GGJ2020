@@ -176,6 +176,7 @@ public class Player_FartSystem : MonoBehaviour
             // Consume food
             
             AccumulateFart(other.GetComponent<Food_Property>().foodValue);
+            other.GetComponent<Food_Property>().Explode();
             other.gameObject.Recycle();
 
             float pitch = Random.Range(0.9f, 1.15f);
