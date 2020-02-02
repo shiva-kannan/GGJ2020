@@ -16,6 +16,8 @@ public class Player_FartSystem : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem m_fartParticles = null;
+    [SerializeField]
+    private AudioSource starPlayer = null;
 
     private AudioSource fartAudio;
 
@@ -148,7 +150,7 @@ public class Player_FartSystem : MonoBehaviour
 
     public void ReleaseFart()
     {
-        Debug.Log("Farting rn: " + mPlayerNumer);
+        //Debug.Log("Farting rn: " + mPlayerNumer);
 
         if (TileMap.Instance != null)
         {
@@ -175,6 +177,10 @@ public class Player_FartSystem : MonoBehaviour
             
             AccumulateFart(other.GetComponent<Food_Property>().foodValue);
             other.gameObject.Recycle();
+
+            float pitch = Random.Range(0.9f, 1.15f);
+            starPlayer.pitch = pitch;
+            starPlayer.Play();
         }
     }
 }
