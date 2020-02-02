@@ -33,8 +33,17 @@ public class Player_Control : MonoBehaviour
         if (isMoving)
         {
             //Vector3 direction = new Vector3(Input.GetAxis("HorizontalKey"), 0, Input.GetAxis("VerticalKey")); // setup a direction Vector based on keyboard input. GetAxis returns a value between -1.0 and 1.0. If the A key is pressed, GetAxis(HorizontalKey) will return -1.0. If D is pressed, it will return 1.0
-            Vector3 rightMovement = right * Input.GetAxis("Horizontal");
-            Vector3 upMovement = forward * Input.GetAxis("Vertical");
+            Vector3 rightMovement = Vector3.zero;
+            Vector3 upMovement = Vector3.zero;
+            if (this.gameObject.tag == "Player")
+            {
+                rightMovement = right * Input.GetAxis("Horizontal1");
+                upMovement = forward * Input.GetAxis("Vertical1");
+            }else
+            {
+                rightMovement = right * Input.GetAxis("Horizontal2");
+                upMovement = forward * Input.GetAxis("Vertical2");
+            }
 
             Vector3 heading = rightMovement + upMovement; // This creates our new direction. By combining our right and forward movements and normalizing them, we create a new vector that points in the appropriate direction with a length no greater than 1.0transform.forward = heading; // Sets forward direction of our game object to whatever direction we're moving intransform.position += rightMovement; // move our transform's position right/left     transform.position += upMovement; // Move our transform's position up/down
 
@@ -51,18 +60,41 @@ public class Player_Control : MonoBehaviour
             transform.LookAt(placeToLook);
 
 
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.05f && Mathf.Abs(Input.GetAxis("Vertical")) < 0.05f)
+            if (this.gameObject.tag == "Player")
             {
-                myrgbody.velocity = Vector3.zero;
-                isMoving = false;
+                if (Mathf.Abs(Input.GetAxis("Horizontal1")) < 0.05f && Mathf.Abs(Input.GetAxis("Vertical1")) < 0.05f)
+                {
+                    myrgbody.velocity = Vector3.zero;
+                    isMoving = false;
+                }
             }
+            else
+            {
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) < 0.05f && Mathf.Abs(Input.GetAxis("Vertical2")) < 0.05f)
+                {
+                    myrgbody.velocity = Vector3.zero;
+                    isMoving = false;
+                }
+            }
+
         }
         else
         {
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) >= 0.05f || Mathf.Abs(Input.GetAxis("Vertical")) >= 0.05f)
+            if (this.gameObject.tag == "Player")
             {
-                isMoving = true;
+                if (Mathf.Abs(Input.GetAxis("Horizontal1")) >= 0.05f || Mathf.Abs(Input.GetAxis("Vertical1")) >= 0.05f)
+                {
+                    isMoving = true;
+                }
             }
+            else
+            {
+                if (Mathf.Abs(Input.GetAxis("Horizontal2")) >= 0.05f || Mathf.Abs(Input.GetAxis("Vertical2")) >= 0.05f)
+                {
+                    isMoving = true;
+                }
+            }
+
         }
 
     }
