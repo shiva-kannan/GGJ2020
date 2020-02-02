@@ -31,10 +31,17 @@ public class Food_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!HUDManager.Instance.iSGameStarted)
+        {
+            return;
+        }
+
         if (mGameTimer <= 0)
         {
             // Game is over
             StopSpawning();
+            HUDManager.Instance.ShowGameOver();
+            Time.timeScale = 0;
             return;
         }
         else
