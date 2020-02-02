@@ -4,5 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GridTest.unity
+    guid: 73a1433aaefcd2f49840989596fe7e13
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 6c2dcf71fb10b9d41afed9ceae557751,
+      type: 2}
