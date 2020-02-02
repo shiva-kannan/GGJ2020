@@ -25,10 +25,8 @@ public class VegetationManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _p2PlantPrefabs = new List<GameObject>();
 
-    private void Start()
-    {
-
-    }
+    public int player1Score = 0;
+    public int player2Score = 0;
 
     public GameObject GetRandomPlant(PlayerNumber forPlayer)
     {
@@ -38,11 +36,15 @@ public class VegetationManager : MonoBehaviour
         {
             choice = Random.Range(0, _p1PlantPrefabs.Count);
             newPlant = Instantiate<GameObject>(_p1PlantPrefabs[choice]);
+            player1Score++;
+            HUDManager.Instance.SetScore(PlayerNumber.Player1, player1Score);
         }
         else
         {
             choice = Random.Range(0, _p2PlantPrefabs.Count);
             newPlant = Instantiate<GameObject>(_p2PlantPrefabs[choice]);
+            player2Score++;
+            HUDManager.Instance.SetScore(PlayerNumber.Player2, player2Score);
         }
         
         return newPlant;

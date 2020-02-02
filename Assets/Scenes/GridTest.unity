@@ -672,6 +672,8 @@ MonoBehaviour:
   - {fileID: 1436951084633532320, guid: 932c5af427a1ee14db171bcc74909c21, type: 3}
   - {fileID: 6137397586931831448, guid: afd7e40a90c2b9941b5e2c37a5cd22a7, type: 3}
   - {fileID: 160358439799667037, guid: 5a24ecf2ecda98b43b630868d0a70b0a, type: 3}
+  player1Score: 0
+  player2Score: 0
 --- !u!1001 &1794253145
 PrefabInstance:
   m_ObjectHideFlags: 0

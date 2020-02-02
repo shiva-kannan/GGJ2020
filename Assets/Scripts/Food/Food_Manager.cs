@@ -16,17 +16,33 @@ public class Food_Manager : MonoBehaviour
     private bool isSpawningFood = false;
     private float spawnTimer = 0;
 
+    [SerializeField][Tooltip("Game time in seconds")]
+    private float m_GameTime = 60;
+    private float mGameTimer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         food1Prefab.CreatePool(30);
         food2Prefab.CreatePool(30);
-        
+        mGameTimer = m_GameTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (mGameTimer <= 0)
+        {
+            // Game is over
+            StopSpawning();
+            return;
+        }
+        else
+        {
+            mGameTimer -= Time.deltaTime;
+            HUDManager.Instance.SetGameTimer(mGameTimer);
+        }
+
         float numOfFood = GameObject.FindGameObjectsWithTag("Food").Length;
         if (numOfFood >= maxFoodNum)
         {
