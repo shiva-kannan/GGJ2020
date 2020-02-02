@@ -7,6 +7,7 @@ public class Player_FartSystem : MonoBehaviour
     public float fartValue; // How much cloud density does one fart increase.
     public float fartInterval; // How long is the arbitrary gay between each fart.
     public float fartPushForce; // A small force that the fart applies to player.
+    public float fartMAX; // Max amount of fart you can store.
 
     public AudioSource fartAudioSource;
     private float fartMeter = 4f; // How long can the angel keep farting, represented in seconds.
@@ -74,7 +75,7 @@ public class Player_FartSystem : MonoBehaviour
         // ----------- CHEAT -------------
         if (Input.GetKeyDown(KeyCode.P))
         {
-            fartMeter = 10;
+            fartMeter = fartMAX;
         }
         // ----------- End CHEAT -------------
     }
@@ -82,6 +83,10 @@ public class Player_FartSystem : MonoBehaviour
     public void AccumulateFart(float amount)
     {
         fartMeter += amount;
+        if (fartMeter >= fartMAX)
+        {
+            fartMeter = fartMAX;
+        }
     }
 
 
@@ -105,7 +110,7 @@ public class Player_FartSystem : MonoBehaviour
         {
             // Consume food
             
-            fartMeter += other.GetComponent<Food_Property>().foodValue;
+            AccumulateFart(other.GetComponent<Food_Property>().foodValue);
             other.gameObject.Recycle();
         }
     }

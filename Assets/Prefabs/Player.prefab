@@ -151,6 +151,7 @@ MonoBehaviour:
   fartValue: 2.8
   fartInterval: 0.5
   fartPushForce: 200
+  fartMAX: 5
   fartAudioSource: {fileID: 2226011037483447262}
   m_fartParticles: {fileID: 4403445245662843547}
 --- !u!65 &4001733990680781918
@@ -313,6 +314,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b784706eb3f8d4430af7a23770a75cf9, type: 3}
   - {fileID: 8300000, guid: e3865832a8517496a8f64f51bb27f044, type: 3}
   - {fileID: 8300000, guid: ff1d69a712ff74b2a9223dd3d8858442, type: 3}
+  fartTriggered: 0
 --- !u!114 &2236461864705393643
 MonoBehaviour:
   m_ObjectHideFlags: 0
