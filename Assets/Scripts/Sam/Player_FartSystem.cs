@@ -8,16 +8,18 @@ public class Player_FartSystem : MonoBehaviour
     public float fartInterval; // How long is the arbitrary gay between each fart.
     public float fartPushForce; // A small force that the fart applies to player.
 
+    public AudioSource fartAudioSource;
     private float fartMeter = 4f; // How long can the angel keep farting, represented in seconds.
     private float fartTimer = 0f;
 
     [SerializeField]
     private ParticleSystem m_fartParticles = null;
 
+    private AudioSource fartAudio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        fartAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,6 +42,11 @@ public class Player_FartSystem : MonoBehaviour
                 {
                     m_fartParticles.Play();
                 }
+
+                // Play the fart audio
+                if (!fartAudioSource.GetComponent<FartAudio>().fartTriggered){
+                    StartCoroutine(fartAudioSource.GetComponent<FartAudio>().randomPlayFart());                
+                }
                 fartMeter -= Time.deltaTime;
 
                 GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * Time.deltaTime;
@@ -54,6 +61,8 @@ public class Player_FartSystem : MonoBehaviour
         {
             fartTimer = 0;
             m_fartParticles.Stop();
+            AudioController.FadeOut(fartAudioSource, 0.2f);
+            fartAudioSource.GetComponent<FartAudio>().fartTriggered = false;
         }
 
 
