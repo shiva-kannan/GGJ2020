@@ -20,7 +20,8 @@ public class TileCell : MonoBehaviour
     [SerializeField]
     private ParticleSystem m_rainParticles = null;
 
-    private float m_CloudDecayRate = 10;   // Cloud decays in m_CloudDecayRate seconds
+    [SerializeField]
+    private float m_MaxCloudDecayTime = 10;   // Cloud decays in m_CloudDecayRate seconds
     private float mCloudDecayTimer = 0;    // In seconds
 
     [SerializeField]
@@ -52,6 +53,7 @@ public class TileCell : MonoBehaviour
         _cloudDensity += density;
         SetCloudDensity();
         //main.startColor = 
+        mCloudDecayTimer = m_MaxCloudDecayTime;
 
         if (_cloudDensity >= 0.9f * CloudMaxDensity)
         {
@@ -112,7 +114,7 @@ public class TileCell : MonoBehaviour
     {
         mPlant = VegetationManager.Instance.GetRandomPlant();
         mPlant.transform.SetParent(transform);
-        mPlant.transform.localPosition = Vector3.zero;
+        mPlant.transform.localPosition = new Vector3(0,0.5f,0);
         mPlant.transform.localScale = Vector3.zero;
     }
 
@@ -120,6 +122,16 @@ public class TileCell : MonoBehaviour
     {
         UpdateState();
 
+        if (!mIsRaining)
+        {
+            // Cloud timer
+            if (mCloudDecayTimer > 0)
+            {
+                mCloudDecayTimer -= Time.deltaTime;
+                _cloudDensity = mCloudDecayTimer * CloudMaxDensity / m_MaxCloudDecayTime;
+                SetCloudDensity();
+            }
+        }
     }
 
     private void UpdateState()
@@ -168,8 +180,9 @@ public class TileCell : MonoBehaviour
                 else
                 {
                     mRainTimer -= Time.deltaTime;
-                    float sizeDelta = 0.01f * Time.deltaTime;
+                    float sizeDelta = 0.1f * Time.deltaTime;
                     float size = Mathf.Clamp01(mPlant.transform.localScale.x + sizeDelta);
+                    Debug.Log("Plant size : " + size);
                     mPlant.transform.localScale = Vector3.one * size;
                 }
                 break;

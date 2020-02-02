@@ -259,6 +259,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a80213c02401840963272bacd402de, type: 3}
+--- !u!1 &841981099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841981100}
+  m_Layer: 0
+  m_Name: ----------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841981100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841981099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.27786255, y: 3.987654, z: 0.18656301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194864533
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,11 +525,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plantPrefabs:
-  - {fileID: -927199367670048503, guid: 4e1f436686c554583a1db697d14862ce, type: 3}
-  - {fileID: -927199367670048503, guid: b7e23141541c245639e1a1c978050866, type: 3}
-  - {fileID: -927199367670048503, guid: a5a65b55dab2345358991e27dd925733, type: 3}
-  - {fileID: -927199367670048503, guid: dcbf34be228364d7e922afe9d5c1e225, type: 3}
-  - {fileID: -927199367670048503, guid: bb10071219dd641ea906a8531461584b, type: 3}
+  - {fileID: 3145644953772698562, guid: efc00c73f30b6e14cbc1d9850dac9c0e, type: 3}
+  - {fileID: 2063250631122324567, guid: 16aa3de7af1a4264d80117ba66e828dc, type: 3}
+  - {fileID: 4110230621095994499, guid: 61075a654da83e44598740c8cbc7dfa5, type: 3}
+  - {fileID: 5679612386915072491, guid: 7a29902bea053ca49b68c95321c531ff, type: 3}
+  - {fileID: 1375757624209181838, guid: 47e77c8b9028bad4c9fcc419881d08b6, type: 3}
+  - {fileID: 4435898104409303306, guid: f4f08556bfa51934ebf7c45563f44c1c, type: 3}
+  - {fileID: 879857981265013759, guid: 1dae6f86d2531e14387cd58d22b795fc, type: 3}
+  - {fileID: 1436951084633532320, guid: 932c5af427a1ee14db171bcc74909c21, type: 3}
+  - {fileID: 6137397586931831448, guid: afd7e40a90c2b9941b5e2c37a5cd22a7, type: 3}
+  - {fileID: 160358439799667037, guid: 5a24ecf2ecda98b43b630868d0a70b0a, type: 3}
+  - {fileID: 146606282406820474, guid: 2ea955a5f33afe349bd13aa02d89ae7d, type: 3}
+  - {fileID: 4491375673043150914, guid: 8adc5c9a9893b4b418f95f7acc14cd21, type: 3}
+  - {fileID: 4312630530356880423, guid: 57171241dcb7ca24c94919e6a069e9b8, type: 3}
 --- !u!1001 &1794253145
 PrefabInstance:
   m_ObjectHideFlags: 0

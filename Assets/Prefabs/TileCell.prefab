@@ -111,6 +111,7 @@ MonoBehaviour:
   _cloudDensity: 0
   m_cloud: {fileID: 1744905820006090072}
   m_rainParticles: {fileID: 8881782336167895946}
+  m_MaxCloudDecayTime: 5
   m_MaxRainTime: 5
   m_DecayDelay: 3
 --- !u!1001 &687833735
