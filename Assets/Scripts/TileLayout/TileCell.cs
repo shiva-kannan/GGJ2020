@@ -124,7 +124,7 @@ public class TileCell : MonoBehaviour
 
             if (emission1.enabled)
             {
-                Debug.Log("Reduce P1");
+                //Debug.Log("Reduce P1");
                 Color cloudColor = main1.startColor.color;
                 if (_cloudDensity > 0)
                 {
