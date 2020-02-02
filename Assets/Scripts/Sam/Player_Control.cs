@@ -32,6 +32,10 @@ public class Player_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!HUDManager.Instance.iSGameStarted)
+        {
+            return;
+        }
         if (isMoving)
         {
             //Vector3 direction = new Vector3(Input.GetAxis("HorizontalKey"), 0, Input.GetAxis("VerticalKey")); // setup a direction Vector based on keyboard input. GetAxis returns a value between -1.0 and 1.0. If the A key is pressed, GetAxis(HorizontalKey) will return -1.0. If D is pressed, it will return 1.0

@@ -47,8 +47,9 @@ MonoBehaviour:
     type: 3}
   food2Prefab: {fileID: 1963656227547703179, guid: 81740186c77eb7d4db36bfd946ca3434,
     type: 3}
-  spawnIntervalMAX: 7
-  spawnIntervalMIN: 4
+  spawnIntervalMAX: 4
+  spawnIntervalMIN: 2
   bigFoodRatio: 0.18
   maxFoodNum: 4
   foodSpawnThreshold: 1
+  m_GameTime: 60

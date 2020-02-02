@@ -33,6 +33,10 @@ public class Player_FartSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!HUDManager.Instance.iSGameStarted)
+        {
+            return;
+        }
         if (mPlayerNumer == PlayerNumber.Player1)
         {
             if (Input.GetButton("Fire1"))
