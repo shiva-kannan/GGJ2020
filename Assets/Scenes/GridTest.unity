@@ -844,7 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841981100}
   m_Layer: 0
-  m_Name: ----------------
+  m_Name: '----------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,6 +2478,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 576106140156027103, guid: ad0b52e3829826c4a802b9ea42c57156,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 576106140156027103, guid: ad0b52e3829826c4a802b9ea42c57156,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 576106140156027103, guid: ad0b52e3829826c4a802b9ea42c57156,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2482519391924447091, guid: ad0b52e3829826c4a802b9ea42c57156,
         type: 3}

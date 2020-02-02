@@ -17,11 +17,14 @@ public class Player_FartSystem : MonoBehaviour
     [SerializeField]
     private ParticleSystem m_fartParticles = null;
     [SerializeField]
+    private GameObject rainbowVFX = null;
+    [SerializeField]
     private AudioSource starPlayer = null;
 
     private AudioSource fartAudio;
 
     private PlayerNumber mPlayerNumer;
+    private GameObject rainbow = null;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +77,10 @@ public class Player_FartSystem : MonoBehaviour
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 isSuperFart = false;
+                if (rainbow != null)
+                {
+                    Destroy(rainbow);
+                }
             }
         }
         else
@@ -82,6 +89,10 @@ public class Player_FartSystem : MonoBehaviour
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 isSuperFart = false;
+                if (rainbow != null)
+                {
+                    Destroy(rainbow);
+                }
             }
         }
 
@@ -122,7 +133,13 @@ public class Player_FartSystem : MonoBehaviour
             fartMeter -= Time.deltaTime;
             if (isSuperFart)
             {
-                GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * 5f * Time.deltaTime;
+                GetComponent<Rigidbody>().velocity = GetComponent<Player_Control>().GetFaceDirect() * fartPushForce * 7.5f * Time.deltaTime;
+                if (rainbow == null)
+                {
+                    rainbow = Instantiate(rainbowVFX) as GameObject;
+                    rainbow.transform.position = m_fartParticles.transform.position;
+                    rainbow.transform.parent = this.transform;
+                }
             }
             else
             {
@@ -133,6 +150,10 @@ public class Player_FartSystem : MonoBehaviour
         {
             fartMeter = 0f;
             isSuperFart = false;
+            if (rainbow != null)
+            {
+                Destroy(rainbow);
+            }
             m_fartParticles.Stop();
             Debug.Log("Stp the fart sound already!");
             AudioController.FadeOut(fartAudioSource, 0.2f);
@@ -163,7 +184,7 @@ public class Player_FartSystem : MonoBehaviour
             {
                 if (isSuperFart)
                 {
-                    cellToFartOn.AddFartCloud(fartValue * 2.5f, mPlayerNumer);
+                    cellToFartOn.AddFartCloud(fartValue * 3.5f, mPlayerNumer);
                 }
                 else
                 {

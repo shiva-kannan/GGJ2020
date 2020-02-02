@@ -156,6 +156,8 @@ MonoBehaviour:
   fartMAX: 5
   fartAudioSource: {fileID: 2226011037483447262}
   m_fartParticles: {fileID: 4403445245662843547}
+  rainbowVFX: {fileID: 5057154072619785064, guid: 5a3e8268a7a2b1146bba31d57cf1e144,
+    type: 3}
   starPlayer: {fileID: 8174687038496149789}
 --- !u!65 &4001733990680781918
 BoxCollider:
