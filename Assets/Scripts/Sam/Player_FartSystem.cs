@@ -57,6 +57,8 @@ public class Player_FartSystem : MonoBehaviour
                 fartMeter = 0f;
                 m_fartParticles.Stop();
             }
+
+            HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
         }
         else
         {
@@ -87,6 +89,8 @@ public class Player_FartSystem : MonoBehaviour
         {
             fartMeter = fartMAX;
         }
+
+        HUDManager.Instance.SetFartMeter(fartMeter / fartMAX);
     }
 
 
