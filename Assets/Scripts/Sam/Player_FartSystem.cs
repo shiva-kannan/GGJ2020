@@ -61,6 +61,13 @@ public class Player_FartSystem : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
+
+        // ----------- CHEAT -------------
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            fartMeter = 10;
+        }
+        // ----------- End CHEAT -------------
     }
 
     public void AccumulateFart(float amount)
@@ -83,16 +90,14 @@ public class Player_FartSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Food")
         {
             // Consume food
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                Destroy(other.gameObject);
-                fartMeter += other.GetComponent<Food_Property>().foodValue;
-            }
+            
+            fartMeter += other.GetComponent<Food_Property>().foodValue;
+            other.gameObject.Recycle();
         }
     }
 }

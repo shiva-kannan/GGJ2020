@@ -54,7 +54,7 @@ public class TileMap : MonoBehaviour
         TileCell cellUnderPoint = null;
         // Do a raycast from the position and get the tile that hit. Expensive? Maybe. Optimize later.
         RaycastHit hitInfo;
-        if (Physics.Raycast(position, Vector3.down, out hitInfo, 10, m_tileLayer))
+        if (Physics.Raycast(position, Vector3.down, out hitInfo, 10, 1 << m_tileLayer))
         {
             cellUnderPoint = hitInfo.collider.GetComponent<TileCell>();
         }
